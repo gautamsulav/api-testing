@@ -1,11 +1,9 @@
-<?php
- header("Access-Control-Allow-Origin: *");
- ?>
 
+<?php 
+  header("Access-Control-Allow-Origin: *");
+?>
 <html>
 <head>
-
-
 	<title>API Testing</title>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,6 +36,7 @@
 
 </body>
 </html>
+
 
 <script type="text/javascript">
 	var i=0;
