@@ -1,7 +1,7 @@
 <?php
 
-// Read JSON file
-$json = file_get_contents('http://skuninja.madeby.ws/logs.json');
+// Read JSON file with Cross Origin Resource Sharing
+$json = file_get_contents('https://cors.io/?http://skuninja.madeby.ws/logs.json');
 //Decode JSON
 $json_data = json_decode($json,true);
 
@@ -17,20 +17,39 @@ $json_data = json_decode($json,true);
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
+ <style type="text/css">
+    /* basic positioning */
+  .legend { list-style: none; }
+  .legend li { float: left; margin-right: 10px; }
+  .legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin: 2px; }
+  /* your colors */
+  .legend .normal { background-color: green; }
+  .legend .warning { background-color: yellow; }
+  .legend .error { background-color: #B80000; }
 
+  </style>
 </head>
 
 <body style="background-color:blue;text-align:center">
   <div class="container">
-  <h2>Table</h2>
-  <p>Difference:</p>                                                                                      
-  <div class="table-responsive">          
+  <h2>Showing Recent Event Logs</h2>
+   <div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+      <ul class="legend">
+        <li><span class="normal "></span> Normal</li>
+        <li><span class="warning"></span> Warning</li>
+        <li><span class="error"></span> Error</li>
+      </ul>
+    </div>
+  </div>                                              
+  <div class="table-responsive col-md-11">          
   <table class="table table-bordered" id="myTable">
     <thead>
       <tr>
-        <th class="col-md-2">#</th>
-        <th class="col-md-2">Date and Time</th>
-        <th class="col-md-2">Subject</th>
+        <th class="col-md-2 text-center">#</th>
+        <th class="col-md-5 text-center">Date and Time</th>
+        <th class="col-md-5 text-center">Subject</th>
       </tr>
     </thead>
     <tbody id="master">
@@ -51,9 +70,9 @@ $json_data = json_decode($json,true);
             else{
               $color='#B80000 ';
             }
-            echo '<tr class="child" bgcolor='.$color.'><td><font color="white">'.$v['id'].'</font></td>
-            <td><font color="white">'.$v['created'].'</font></td>
-            <td><font color="white">'.$v['subject'].'</font></td></tr>';
+            echo '<tr class="child" bgcolor='.$color.'><td class="text-center"><font color="white">'.$v['id'].'</font></td>
+            <td class="text-center"><font color="white">'.$v['created'].'</font></td>
+            <td class="text-center"><font color="white">'.$v['subject'].'</font></td></tr>';
           }
       ?>
     </tbody>
@@ -71,7 +90,7 @@ $json_data = json_decode($json,true);
   setInterval(function(){
     $.ajax({ 
       type: 'GET', 
-      url: 'http://skuninja.madeby.ws/logs.json', 
+      url: 'https://cors.io/?http://skuninja.madeby.ws/logs.json', 
       dataType: 'json',
       success: function (data) {
         $('#master').empty();
@@ -91,7 +110,7 @@ $json_data = json_decode($json,true);
                 {
                   background='#B80000';
                 }
-                $('#myTable tbody').append('<tr class="child" bgcolor='+background + '><td><font color="white">'+i+'</font></td><td><font color="white">'+val.created+'</font></td><td><font color="white">'+val.subject+'</font></td></tr>');
+                $('#myTable tbody').append('<tr class="child" bgcolor='+background + '><td class="text-center"><font color="white">'+i+'</font></td><td class="text-center"><font color="white">'+val.created+'</font></td><td class="text-center"><font color="white">'+val.subject+'</font></td></tr>');
               
               });
               
@@ -102,7 +121,7 @@ $json_data = json_decode($json,true);
       }
   });
 
-  },2000);
+  },5000);
 
 
 </script>
