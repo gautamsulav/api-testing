@@ -16,7 +16,7 @@ $json_data = json_decode($json,true);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
- 
+  <!-- css for legends-->
   <style type="text/css">
     /* basic positioning */
   .legend { list-style: none; }
@@ -57,6 +57,7 @@ $json_data = json_decode($json,true);
     </thead>
     <tbody id="master">
       <?php
+        //processing and displaying json file
         $i=0;
         foreach($json_data as $data)
           foreach($data as $key=>$value)
@@ -87,12 +88,12 @@ $json_data = json_decode($json,true);
 
 </body>
 </html>
-
+<!-- javascript for  refreshing the page-->
 <script type="text/javascript">
 	$(document).ready(function() {
 	  setInterval(function() {
 	    cache_clear()
-	  }, 300000);
+	  }, 3000);
 	});
 
 	function cache_clear() {
