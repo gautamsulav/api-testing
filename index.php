@@ -93,7 +93,7 @@ $json_data = json_decode($json,true);
 	$(document).ready(function() {
 	  setInterval(function() {
 	    cache_clear()
-	  }, 3000);
+	  }, 300000);
 	});
 
 	function cache_clear() {
